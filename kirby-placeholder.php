@@ -38,7 +38,7 @@ class KirbyPlaceholder {
   }
 
   public static function url ($width = 0, $height = 0) {
-    return self::base() . self::route() . "/{$width}x{$height}";
+    return self::base() . self::route() . "?size={$width}x{$height}";
   }
 
   private static function base () {
