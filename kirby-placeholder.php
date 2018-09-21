@@ -7,26 +7,35 @@
  *
  */
 
-kirby()->routes([
-  [
-    'pattern' => c::get('kirbyplaceholder.route', 'kp'),
-    'action'  => function () { 
+namespace KirbyPlaceholder;
+use c;
 
-      header ("Content-type: image/png");
+class KirbyPlaceholder {
+  public static function register () {
+    kirby()->routes([
+      [
+        'pattern' => c::get('kirbyplaceholder.route', 'kp'),
+        'action'  => function () { 
 
-      // Dimensions
-      $getsize = isset($_GET['size']) ? $_GET['size'] : '1x1';
-      $dimensions = explode('x', $getsize);
+          header ("Content-type: image/png");
 
-      // Create image
-      $image = imagecreate($dimensions[0], $dimensions[1]);
+          // Dimensions
+          $getsize = isset($_GET['size']) ? $_GET['size'] : '1x1';
+          $dimensions = explode('x', $getsize);
 
-      // make transparent
-      $black = imagecolorallocate($image, 0, 0, 0);
-      imagecolortransparent($image, $black);
+          // Create image
+          $image = imagecreate($dimensions[0], $dimensions[1]);
 
-      // Render image
-      imagepng($image);
-    }
-  ]
-]);
+          // make transparent
+          $black = imagecolorallocate($image, 0, 0, 0);
+          imagecolortransparent($image, $black);
+
+          // Render image
+          imagepng($image);
+        }
+      ]
+    ]);
+  }
+}
+
+KirbyPlaceholder::register();
