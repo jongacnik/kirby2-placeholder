@@ -14,7 +14,7 @@ class KirbyPlaceholder {
   public static function register () {
     kirby()->routes([
       [
-        'pattern' => c::get('kirbyplaceholder.route', 'kp'),
+        'pattern' => self::route(),
         'action'  => function () { 
 
           header ("Content-type: image/png");
@@ -35,6 +35,18 @@ class KirbyPlaceholder {
         }
       ]
     ]);
+  }
+
+  public static function url ($width = 0, $height = 0) {
+    return self::base() . self::route() . "/{$width}x{$height}";
+  }
+
+  private static function base () {
+    return str_replace('//', '/', url() . '/');
+  }
+
+  private static function route () {
+    return c::get('kirbyplaceholder.route', 'kp');
   }
 }
 
