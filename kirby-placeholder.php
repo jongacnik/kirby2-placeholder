@@ -71,7 +71,7 @@ class KirbyPlaceholder {
   }
 
   private static function base () {
-    return str_replace('//', '/', url() . '/');
+    return url() === '/' ? '/' : url() . '/';
   }
 
   private static function route () {
